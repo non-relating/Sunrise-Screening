@@ -469,11 +469,12 @@ const Reviews = () => (
 );
 
 const Contact: React.FC = () => {
-  const [formState, setFormState] = useState<'idle' | 'submitting' | 'success'>('idle');
+  const [formState, setFormState] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [service, setService] = useState('I have a torn screen');
   const [errors, setErrors] = useState<{ name?: string; phone?: string }>({});
+  const [errorMessage, setErrorMessage] = useState('');
 
   const validate = () => {
     const next: { name?: string; phone?: string } = {};
@@ -485,12 +486,33 @@ const Contact: React.FC = () => {
     return Object.keys(next).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!validate()) return;
+    
     setFormState('submitting');
-    // Simulate API call
-    setTimeout(() => setFormState('success'), 1500);
+    setErrorMessage('');
+    
+    try {
+      const response = await fetch('/.netlify/functions/submit-contact-form', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, phone, service }),
+      });
+      
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || 'Failed to submit form');
+      }
+      
+      setFormState('success');
+      setName('');
+      setPhone('');
+      setService('I have a torn screen');
+    } catch (error) {
+      setFormState('error');
+      setErrorMessage(error instanceof Error ? error.message : 'An error occurred');
+    }
   };
 
   return (
@@ -516,6 +538,11 @@ const Contact: React.FC = () => {
                 </div>
                 
                 <form className="space-y-6 max-w-lg mx-auto" onSubmit={handleSubmit} noValidate>
+                  {formState === 'error' && (
+                    <div role="alert" className="p-4 rounded-lg bg-rose-500/20 border border-rose-400 text-rose-200">
+                      {errorMessage}
+                    </div>
+                  )}
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                         <label htmlFor="contact-name" className="block text-sm font-bold mb-2 text-sky-200 uppercase tracking-wide">Name</label>
