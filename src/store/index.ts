@@ -161,7 +161,7 @@ interface ServiceRequestsStore {
 
 export const useServiceRequestsStore = create<ServiceRequestsStore>()(
   devtools(
-    (_set, _get) => ({
+    (set, _get) => ({
       requests: [],
       isLoading: false,
       error: null,
@@ -308,7 +308,7 @@ interface ConfigStore {
 
 export const useConfigStore = create<ConfigStore>()(
   devtools(
-    (_set, _get) => ({
+    (set, _get) => ({
       serviceTypes: [],
       meshTypes: [],
       config: null,
@@ -447,7 +447,7 @@ interface UIStore extends UIState {
 
 export const useUIStore = create<UIStore>()(
   devtools(
-    (_set, _get) => ({
+    (set, _get) => ({
       isLoading: false,
       isMenuOpen: false,
       activeModal: null,
