@@ -475,9 +475,24 @@ const Reviews = () => (
 
 const Contact: React.FC = () => {
   const [formState, setFormState] = useState<'idle' | 'submitting' | 'success'>('idle');
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [service, setService] = useState('I have a torn screen');
+  const [errors, setErrors] = useState<{ name?: string; phone?: string }>({});
+
+  const validate = () => {
+    const next: { name?: string; phone?: string } = {};
+    if (!name.trim()) next.name = 'Please enter your name.';
+    // basic phone validation: digits length 10
+    const digits = phone.replace(/\D/g, '');
+    if (digits.length < 10) next.phone = 'Please enter a valid phone number.';
+    setErrors(next);
+    return Object.keys(next).length === 0;
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!validate()) return;
     setFormState('submitting');
     // Simulate API call
     setTimeout(() => setFormState('success'), 1500);
@@ -505,20 +520,22 @@ const Contact: React.FC = () => {
                   <p className="text-sky-200 text-lg">Get your enclosure looking brand new — without the hassle.</p>
                 </div>
                 
-                <form className="space-y-6 max-w-lg mx-auto" onSubmit={handleSubmit}>
+                <form className="space-y-6 max-w-lg mx-auto" onSubmit={handleSubmit} noValidate>
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
-                        <label className="block text-sm font-bold mb-2 text-sky-200 uppercase tracking-wide">Name</label>
-                        <input required type="text" className="w-full px-5 py-4 rounded-xl bg-sky-950/50 border border-sky-700 text-white placeholder-sky-500/50 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all" placeholder="John Doe" />
+                        <label htmlFor="contact-name" className="block text-sm font-bold mb-2 text-sky-200 uppercase tracking-wide">Name</label>
+                        <input id="contact-name" name="name" value={name} onChange={(e) => setName(e.target.value)} aria-invalid={!!errors.name} aria-describedby={errors.name ? 'error-name' : undefined} required type="text" className="w-full px-5 py-4 rounded-xl bg-sky-950/50 border border-sky-700 text-white placeholder-sky-500/50 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all" placeholder="John Doe" />
+                        {errors.name && <div id="error-name" role="alert" className="mt-2 text-rose-300 text-sm">{errors.name}</div>}
                     </div>
                     <div>
-                        <label className="block text-sm font-bold mb-2 text-sky-200 uppercase tracking-wide">Phone</label>
-                        <input required type="tel" className="w-full px-5 py-4 rounded-xl bg-sky-950/50 border border-sky-700 text-white placeholder-sky-500/50 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all" placeholder="(555) 555-5555" />
+                        <label htmlFor="contact-phone" className="block text-sm font-bold mb-2 text-sky-200 uppercase tracking-wide">Phone</label>
+                        <input id="contact-phone" name="phone" value={phone} onChange={(e) => setPhone(e.target.value)} aria-invalid={!!errors.phone} aria-describedby={errors.phone ? 'error-phone' : undefined} required type="tel" inputMode="tel" className="w-full px-5 py-4 rounded-xl bg-sky-950/50 border border-sky-700 text-white placeholder-sky-500/50 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all" placeholder="(555) 555-5555" />
+                        {errors.phone && <div id="error-phone" role="alert" className="mt-2 text-rose-300 text-sm">{errors.phone}</div>}
                     </div>
                   </div>
                   <div>
-                      <label className="block text-sm font-bold mb-2 text-sky-200 uppercase tracking-wide">How can we help?</label>
-                      <select className="w-full px-5 py-4 rounded-xl bg-sky-950/50 border border-sky-700 text-white focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all appearance-none">
+                      <label htmlFor="contact-service" className="block text-sm font-bold mb-2 text-sky-200 uppercase tracking-wide">How can we help?</label>
+                      <select id="contact-service" name="service" value={service} onChange={(e) => setService(e.target.value)} className="w-full px-5 py-4 rounded-xl bg-sky-950/50 border border-sky-700 text-white focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all appearance-none">
                         <option>I have a torn screen</option>
                         <option>I need a full rescreen</option>
                         <option>Storm damage repair</option>
