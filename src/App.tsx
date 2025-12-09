@@ -142,7 +142,7 @@ const Reveal: React.FC<React.PropsWithChildren<{ delay?: number; className?: str
 
 const Logo: React.FC<{ scrolled?: boolean }> = ({ scrolled }) => (
   <div className="flex items-center gap-3 cursor-pointer group">
-    <div className="relative w-12 h-12 flex-shrink-0 transition-transform group-hover:scale-105 duration-300">
+    <div className="relative w-16 h-16 flex-shrink-0 transition-transform group-hover:scale-105 duration-300">
       <img src="/sunrise-logo.png" alt="Sunrise Screening" className="w-full h-full object-contain drop-shadow-md" />
     </div>
     <div className={`flex flex-col leading-tight ${scrolled ? 'text-slate-900' : 'text-white drop-shadow-md'}`}>
