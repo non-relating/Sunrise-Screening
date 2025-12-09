@@ -34,16 +34,13 @@ const Header: React.FC = () => {
           whileHover={{ scale: 1.05 }}
           onClick={() => window.location.href = '/'}
         >
-          <div className="relative w-12 h-12">
-            <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-md">
-              <circle cx="50" cy="50" r="30" fill="#fbbf24" />
-              <path d="M50 20 L20 80 L80 80 Z" fill="#ffffff" opacity="0.95" transform="translate(0, 5) scale(0.6) translate(35, 15)" />
-              <path d="M10 70 Q 30 60, 50 70 T 90 70" stroke="#0ea5e9" strokeWidth="8" fill="none" strokeLinecap="round" />
-              <path d="M10 85 Q 30 75, 50 85 T 90 85" stroke="#0369a1" strokeWidth="8" fill="none" strokeLinecap="round" />
-            </svg>
-          </div>
-          <div className={`flex flex-col leading-tight ${scrolled ? 'text-slate-900' : 'text-white drop-shadow-md'}`}>
-            <span className="font-extrabold text-2xl tracking-tight uppercase">Sunrise</span>
+          <img 
+            src="/sunrise-logo.svg" 
+            alt="Sunrise Screening" 
+            className={`w-16 h-auto drop-shadow-md transition-all duration-300 ${scrolled ? 'brightness-100' : 'brightness-110'}`}
+          />
+          <div className={`flex-col leading-tight hidden sm:flex ${scrolled ? 'text-slate-900' : 'text-white drop-shadow-md'}`}>
+            <span className="font-extrabold text-xl tracking-tight uppercase">Sunrise</span>
             <span className="text-xs font-bold tracking-widest uppercase opacity-90">Screening</span>
           </div>
         </motion.div>

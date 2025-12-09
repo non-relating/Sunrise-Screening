@@ -22,16 +22,20 @@ const HomePage: React.FC = () => {
         </div>
 
         <div className="container mx-auto px-4 relative z-10 max-w-4xl text-center">
-          <motion.img
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            src="/sunrise-logo.png"
-            alt="Sunrise Screening logo"
-            className="w-40 mx-auto mb-6 filter drop-shadow-lg"
+            className="flex justify-center mb-8"
             data-aos="fade-up"
             data-aos-delay="200"
-          />
+          >
+            <img
+              src="/sunrise-logo.svg"
+              alt="Sunrise Screening logo"
+              className="w-48 h-auto filter drop-shadow-lg"
+            />
+          </motion.div>
           
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
