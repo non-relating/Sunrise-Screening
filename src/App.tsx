@@ -143,12 +143,7 @@ const Reveal: React.FC<React.PropsWithChildren<{ delay?: number; className?: str
 const Logo: React.FC<{ scrolled?: boolean }> = ({ scrolled }) => (
   <div className="flex items-center gap-3 cursor-pointer group">
     <div className="relative w-12 h-12 flex-shrink-0 transition-transform group-hover:scale-105 duration-300">
-      <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-md">
-        <circle cx="50" cy="50" r="30" fill="#fbbf24" />
-        <path d="M50 20 L20 80 L80 80 Z" fill="#ffffff" opacity="0.95" transform="translate(0, 5) scale(0.6) translate(35, 15)" />
-        <path d="M10 70 Q 30 60, 50 70 T 90 70" stroke="#0ea5e9" strokeWidth="8" fill="none" strokeLinecap="round" />
-        <path d="M10 85 Q 30 75, 50 85 T 90 85" stroke="#0369a1" strokeWidth="8" fill="none" strokeLinecap="round" />
-      </svg>
+      <img src="/sunrise-logo.png" alt="Sunrise Screening" className="w-full h-full object-contain drop-shadow-md" />
     </div>
     <div className={`flex flex-col leading-tight ${scrolled ? 'text-slate-900' : 'text-white drop-shadow-md'}`}>
       <span className="font-extrabold text-2xl tracking-tight uppercase">Sunrise</span>
@@ -200,11 +195,11 @@ const Navbar: React.FC<{ scrolled?: boolean; scrollToSection: (id: string) => vo
             </button>
           ))}
           <a 
-            href="tel:+15551234567" 
+            href="tel:+17273512050" 
             className="bg-amber-500 hover:bg-amber-400 text-slate-900 px-6 py-2.5 rounded-full font-bold shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all flex items-center gap-2 text-sm"
           >
             <Phone size={18} className="fill-current" />
-            (555) 123-4567
+            727-351-2050
           </a>
         </div>
 
@@ -232,7 +227,7 @@ const Navbar: React.FC<{ scrolled?: boolean; scrollToSection: (id: string) => vo
             {item} <ArrowRight size={16} className="text-sky-500" />
           </button>
         ))}
-        <a href="tel:+15551234567" className="bg-sky-600 text-white text-center py-4 rounded-xl font-bold shadow-md active:scale-95 transition-transform mt-2">
+        <a href="tel:+17273512050" className="bg-sky-600 text-white text-center py-4 rounded-xl font-bold shadow-md active:scale-95 transition-transform mt-2">
           Call Now
         </a>
       </div>
@@ -283,11 +278,11 @@ const Hero: React.FC<{ scrollToSection: (id: string) => void }> = ({ scrollToSec
               Get a Free Quote <ArrowRight size={20} />
             </button>
             <a 
-              href="tel:+15551234567" 
+              href="tel:+17273512050" 
               className="bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all flex items-center justify-center gap-2 hover:border-white/50"
             >
               <Phone size={20} />
-              Call Now
+              727-351-2050
             </a>
           </div>
         </Reveal>
@@ -389,9 +384,9 @@ const WhyUs = () => (
              <div className="relative group">
                 <div className="absolute -inset-4 bg-gradient-to-r from-sky-500 to-amber-500 rounded-2xl opacity-30 blur-lg group-hover:opacity-50 transition-opacity duration-500"></div>
                 <img 
-                  src="https://images.unsplash.com/photo-1572331165267-854da2b00dc1?q=80&w=1200&auto=format&fit=crop" 
-                  alt="Clean Pool Enclosure" 
-                  className="relative rounded-2xl shadow-2xl border border-white/10 w-full"
+                  src="/sunrise-logo.png" 
+                  alt="Sunrise Screening logo" 
+                  className="relative rounded-2xl shadow-2xl border border-white/10 w-full max-w-[420px] mx-auto object-contain"
                 />
                 <div className="absolute -bottom-6 -right-6 bg-white text-slate-900 p-6 rounded-2xl shadow-xl hidden md:block animate-bounce-slow">
                    <div className="text-4xl font-extrabold text-sky-600">500+</div>
@@ -557,7 +552,7 @@ const Contact: React.FC = () => {
             <div className="mt-10 pt-8 border-t border-sky-800 flex flex-col md:flex-row items-center justify-center gap-8 text-sky-300">
               <div className="flex items-center gap-3">
                 <div className="bg-sky-800 p-2 rounded-full"><Phone size={18} className="text-amber-400" /></div>
-                <span className="font-semibold text-white">(555) 123-4567</span>
+                    <span className="font-semibold text-white">727-351-2050</span>
               </div>
               <div className="flex items-center gap-3">
                 <div className="bg-sky-800 p-2 rounded-full"><Mail size={18} className="text-amber-400" /></div>
@@ -639,8 +634,8 @@ const App = () => {
         <button onClick={() => scrollToSection('contact')} className="flex-1 bg-sky-600 active:bg-sky-700 text-white font-bold py-3.5 rounded-xl text-sm shadow-sm transition-colors">
           Get Quote
         </button>
-        <a href="tel:+15551234567" className="flex-1 bg-amber-500 active:bg-amber-600 text-slate-900 font-bold py-3.5 rounded-xl text-sm flex items-center justify-center gap-2 shadow-sm transition-colors">
-          <Phone size={18} /> Call Now
+        <a href="tel:+17273512050" className="flex-1 bg-amber-500 active:bg-amber-600 text-slate-900 font-bold py-3.5 rounded-xl text-sm flex items-center justify-center gap-2 shadow-sm transition-colors">
+          <Phone size={18} /> 727-351-2050
         </a>
       </div>
 
