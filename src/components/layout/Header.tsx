@@ -35,7 +35,7 @@ const Header: React.FC = () => {
           onClick={() => window.location.href = '/'}
         >
           <img 
-            src="/sunrise-logo.svg" 
+            src="/sunrise-logo.png" 
             alt="Sunrise Screening" 
             className={`w-16 h-auto drop-shadow-md transition-all duration-300 ${scrolled ? 'brightness-100' : 'brightness-110'}`}
           />

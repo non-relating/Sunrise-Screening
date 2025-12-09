@@ -31,7 +31,7 @@ const HomePage: React.FC = () => {
             data-aos-delay="200"
           >
             <img
-              src="/sunrise-logo.svg"
+              src="/sunrise-logo.png"
               alt="Sunrise Screening logo"
               className="w-48 h-auto filter drop-shadow-lg"
             />
