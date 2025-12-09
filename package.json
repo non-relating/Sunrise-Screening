@@ -4,6 +4,10 @@
   "version": "1.0.0",
   "description": "Fully reactive web application for Sunrise Screening - Pool screen repair services",
   "type": "module",
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
