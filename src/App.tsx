@@ -239,8 +239,8 @@ const Hero: React.FC<{ scrollToSection: (id: string) => void }> = ({ scrollToSec
   <header id="hero" className="relative min-h-[95vh] flex items-center pt-20 overflow-hidden">
     <div className="absolute inset-0 z-0">
       <img 
-        src="https://images.unsplash.com/photo-1596529847296-12c82307204f?q=80&w=2000&auto=format&fit=crop" 
-        alt="Florida Pool Enclosure at Sunset" 
+        src="/hero-pool-sunrise.png" 
+        alt="Pool enclosure at sunrise" 
         className="w-full h-full object-cover"
       />
       <div className="absolute inset-0 bg-gradient-to-r from-sky-950/95 via-sky-900/80 to-transparent" />
