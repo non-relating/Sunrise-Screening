@@ -500,9 +500,18 @@ const Contact: React.FC = () => {
         body: JSON.stringify({ name, phone, service }),
       });
       
+      const responseText = await response.text();
+      let data: any;
+      
+      try {
+        data = responseText ? JSON.parse(responseText) : {};
+      } catch (parseError) {
+        console.error('Failed to parse response:', responseText);
+        throw new Error('Server response was invalid. Please try again.');
+      }
+      
       if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.error || 'Failed to submit form');
+        throw new Error(data.error || `Server error: ${response.status}`);
       }
       
       setFormState('success');
@@ -511,7 +520,7 @@ const Contact: React.FC = () => {
       setService('I have a torn screen');
     } catch (error) {
       setFormState('error');
-      setErrorMessage(error instanceof Error ? error.message : 'An error occurred');
+      setErrorMessage(error instanceof Error ? error.message : 'An error occurred. Please try again.');
     }
   };
 

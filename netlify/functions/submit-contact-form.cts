@@ -12,7 +12,14 @@ interface NetlifyEvent {
 interface NetlifyResponse {
   statusCode: number;
   body: string;
+  headers?: Record<string, string>;
 }
+
+const getHeaders = () => ({
+  'Content-Type': 'application/json',
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'Content-Type',
+});
 
 // Helper to send email via SendGrid
 async function sendEmail(name: string, phone: string, service: string) {
@@ -74,9 +81,19 @@ Please contact the customer to provide a quote.
 }
 
 exports.handler = async (event: NetlifyEvent): Promise<NetlifyResponse> => {
+  // Handle CORS preflight
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 200,
+      headers: getHeaders(),
+      body: '',
+    };
+  }
+
   if (event.httpMethod !== 'POST') {
     return {
       statusCode: 405,
+      headers: getHeaders(),
       body: JSON.stringify({ error: 'Method not allowed' }),
     };
   }
@@ -88,6 +105,7 @@ exports.handler = async (event: NetlifyEvent): Promise<NetlifyResponse> => {
     if (!data.name || !data.phone || !data.service) {
       return {
         statusCode: 400,
+        headers: getHeaders(),
         body: JSON.stringify({ error: 'Missing required fields' }),
       };
     }
@@ -97,6 +115,7 @@ exports.handler = async (event: NetlifyEvent): Promise<NetlifyResponse> => {
     if (digits.length < 10) {
       return {
         statusCode: 400,
+        headers: getHeaders(),
         body: JSON.stringify({ error: 'Invalid phone number' }),
       };
     }
@@ -115,6 +134,7 @@ exports.handler = async (event: NetlifyEvent): Promise<NetlifyResponse> => {
 
     return {
       statusCode: 200,
+      headers: getHeaders(),
       body: JSON.stringify({ 
         success: true, 
         message: 'Quote request submitted successfully. We will contact you shortly!' 
@@ -124,6 +144,7 @@ exports.handler = async (event: NetlifyEvent): Promise<NetlifyResponse> => {
     console.error('Error processing form:', error);
     return {
       statusCode: 500,
+      headers: getHeaders(),
       body: JSON.stringify({ error: 'Failed to process form submission' }),
     };
   }
